@@ -2,13 +2,13 @@
 <resources>
     <!-- Splash Screen Theme. -->
     <style name="Theme.AppSplash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenBackground">#1C1B1F</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.PlantDiseaseIdentifiers</item>
 
         <!-- Status bar and Nav bar configs -->
-        <item name="android:statusBarColor" >@color/white</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/status_bar_dark_mode_color</item>
+        <item name="android:navigationBarColor">#1C1B1F</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

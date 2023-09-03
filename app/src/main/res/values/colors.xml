@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#4CAF50</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Light mode color -->
+    <color name="status_bar_light_mode_color">@color/white</color>
+    <!-- Dark mode color -->
+    <color name="status_bar_dark_mode_color">#1C1B1F</color>
 </resources>

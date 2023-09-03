@@ -2,6 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.PlantDiseaseIdentifiers" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+         <item name="colorPrimary">#4CAF50</item>
+        <item name="android:statusBarColor">@color/status_bar_dark_mode_color</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
     </style>
 </resources>
