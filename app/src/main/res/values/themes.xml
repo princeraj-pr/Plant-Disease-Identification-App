@@ -2,7 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.PlantDiseaseIdentifiers" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">#18D38F</item>
+        <item name="colorSecondary">#29C3FD</item>
+        <item name="colorAccent">#29C3FD</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:statusBarColor">@color/status_bar_light_mode_color</item>
         <item name="android:windowLightStatusBar">true</item>

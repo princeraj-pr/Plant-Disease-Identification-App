@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?attr/materialCardViewFilledStyle"
-            android:backgroundTint="#414CAF50"
+            android:backgroundTint="#4029C3FD"
             android:layout_above="@id/login_button_layout">
 
         <LinearLayout
