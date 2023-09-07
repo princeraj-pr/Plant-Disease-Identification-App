@@ -9,5 +9,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="receive_email">I don\'t want to receive emails with the latest plant new and recommendations from botanists.</string>
+    <string name="receive_email">I don\'t want to receive emails with the latest plant news and recommendations from botanists.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

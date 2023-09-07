@@ -42,7 +42,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
     val lifecycleVersion = "2.2.0"
     implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
-    annotationProcessor("androidx.lifecycle:lifecycle-common-java8:2.6.1")
+    annotationProcessor("androidx.lifecycle:lifecycle-common-java8:2.6.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -6,8 +6,6 @@ import androidx.core.splashscreen.SplashScreen;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.sih23.plantdiseaseidentifiers.ui.login.LoginActivity;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

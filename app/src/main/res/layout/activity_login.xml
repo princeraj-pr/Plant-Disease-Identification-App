@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginActivity">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?attr/materialCardViewFilledStyle"
-            android:backgroundTint="#254CAF50"
+            android:backgroundTint="#414CAF50"
             android:layout_above="@id/login_button_layout">
 
         <LinearLayout
