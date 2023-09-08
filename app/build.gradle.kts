@@ -40,9 +40,16 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.core:core-splashscreen:1.0.1")
+
     val lifecycleVersion = "2.2.0"
     implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
     annotationProcessor("androidx.lifecycle:lifecycle-common-java8:2.6.2")
+
+    val cameraxVersion = "1.2.3"
+    implementation("androidx.camera:camera-core:$cameraxVersion")
+    implementation("androidx.camera:camera-camera2:$cameraxVersion")
+    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
+    implementation("androidx.camera:camera-view:$cameraxVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
