@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,6 +43,8 @@ public class SignUpActivity extends AppCompatActivity {
                 MaterialShapeDrawable.createWithElevationOverlay(this));
 
         Button switchAccButton = binding.switchCreateAccBtn;
+        Button signupButton = binding.signupBtn;
+
         switchAccButton.setOnClickListener(new View.OnClickListener() {
             boolean fragmentState = false;
             @Override
@@ -62,6 +65,16 @@ public class SignUpActivity extends AppCompatActivity {
                             .commit();
                     fragmentState = true;
                 }
+            }
+        });
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(getBaseContext(), LoginActivity.class);
+                startActivity(loginIntent);
+                // Destroy the current activity after user account is created
+                finish();
             }
         });
     }

@@ -13,9 +13,12 @@
         android:theme="@style/Theme.PlantDiseaseIdentifiers"
         tools:targetApi="31">
         <activity
-            android:label="Create Account"
-            android:name=".SignUpActivity"
+            android:name=".HomeActivity"
             android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false"
+            android:label="Create Account" />
         <activity
             android:name=".LoginActivity"
             android:exported="false"

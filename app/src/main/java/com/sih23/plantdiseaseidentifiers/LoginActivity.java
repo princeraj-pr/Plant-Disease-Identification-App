@@ -19,11 +19,23 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Button signUpButton = binding.createAccountButton;
+        Button loginButton = binding.loginBtn;
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent signUpIntent = new Intent(getBaseContext(), SignUpActivity.class);
                 startActivity(signUpIntent);
+            }
+        });
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start home activity after user login successfully
+                Intent homeIntent = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(homeIntent);
+                // Destroy current activity after user login successfully
+                finish();
             }
         });
     }
