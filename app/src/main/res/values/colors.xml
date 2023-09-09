@@ -3,6 +3,7 @@
     <color name="colorPrimary">#1BF0A3</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorAccent">#15E4FD</color>
     <!-- Light mode color -->
     <color name="status_bar_light_mode_color">@color/white</color>
     <!-- Dark mode color -->

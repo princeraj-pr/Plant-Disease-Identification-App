@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start home activity after user login successfully
-                Intent homeIntent = new Intent(getBaseContext(), HomeActivity.class);
+                Intent homeIntent = new Intent(getBaseContext(), PlantActivity.class);
                 startActivity(homeIntent);
                 // Destroy current activity after user login successfully
                 finish();

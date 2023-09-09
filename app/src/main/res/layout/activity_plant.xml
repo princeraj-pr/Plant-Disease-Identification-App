@@ -4,7 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".PlantActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/frameLayout"
+        android:name="com.sih23.plantdiseaseidentifiers.HomeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_home"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -29,6 +36,7 @@
         android:contentDescription="@string/app_name"
         app:fabCustomSize="64dp"
         app:srcCompat="@drawable/ic_camera_24"
+        android:backgroundTint="@color/colorAccent"
         android:layout_marginBottom="20dp"
         app:layout_anchor="@id/bottomAppBar" />
 
