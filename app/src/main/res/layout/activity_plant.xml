@@ -37,7 +37,7 @@
         app:fabCustomSize="64dp"
         app:srcCompat="@drawable/ic_camera_24"
         android:backgroundTint="@color/colorAccent"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         app:layout_anchor="@id/bottomAppBar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

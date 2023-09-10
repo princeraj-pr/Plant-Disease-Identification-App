@@ -4,30 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context=".CameraActivity">
 
-    <androidx.camera.view.PreviewView
-        android:id="@+id/viewFinder"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_preview"
+        style="?attr/materialCardViewFilledStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toTopOf="@id/image_capture_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/materialIconButtonStyle"
+            app:iconSize="24dp"
+            android:layout_margin="8dp"
+            app:iconTint="@color/white"
+            app:icon="@drawable/ic_back_24"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/help_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/materialIconButtonStyle"
+            app:iconSize="24dp"
+            android:layout_margin="8dp"
+            android:layout_gravity="end"
+            app:iconTint="@color/white"
+            app:icon="@drawable/ic_help_24"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="48dp"
+            android:src="@drawable/ic_camera_corner"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/focusRing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_auto_focus"
+            android:visibility="invisible"
+            tools:ignore="ContentDescription" />
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/image_capture_button"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="50dp"
-        android:elevation="2dp"
-        android:text="Take Photo"
+        style="?attr/materialIconButtonStyle"
+        android:layout_width="94dp"
+        android:layout_height="94dp"
+        android:layout_margin="16dp"
+        android:contentDescription="Capture a plant photo"
+        app:icon="@drawable/ic_camera_shutter_24"
+        app:iconGravity="textStart"
+        app:iconSize="96dp"
+        app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_centerline" />
+        app:layout_constraintEnd_toStartOf="@+id/flash_button"
+        app:layout_constraintStart_toEndOf="@+id/add_photo_button"
+        app:layout_constraintTop_toBottomOf="@id/card_preview"
+        app:rippleColor="#28000000" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vertical_centerline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".50" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_photo_button"
+        style="?attr/materialIconButtonStyle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="Add Photo from Gallery"
+        app:icon="@drawable/ic_add_photo_24"
+        app:iconGravity="textStart"
+        app:iconSize="40dp"
+        app:iconTint="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/image_capture_button"
+        app:layout_constraintEnd_toStartOf="@+id/image_capture_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="#28000000" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/flash_button"
+        style="?attr/materialIconButtonStyle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="Flash"
+        app:icon="@drawable/ic_flash_on_24"
+        app:iconGravity="textStart"
+        app:iconSize="40dp"
+        app:iconTint="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/image_capture_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_capture_button"
+        app:rippleColor="#28000000" />
 </androidx.constraintlayout.widget.ConstraintLayout>

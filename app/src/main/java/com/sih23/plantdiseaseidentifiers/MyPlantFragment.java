@@ -1,5 +1,8 @@
 package com.sih23.plantdiseaseidentifiers;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +65,13 @@ public class MyPlantFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_plant, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_plant, container, false);
+
+        ImageView imageView = view.findViewById(R.id.plant_image);
+        ContextWrapper cw = new ContextWrapper(getContext());
+        File directory = cw.getExternalFilesDir(null);
+        File file = new File(directory, "plant" + ".jpg");
+        imageView.setImageDrawable(Drawable.createFromPath(file.toString()));
+        return view;
     }
 }
