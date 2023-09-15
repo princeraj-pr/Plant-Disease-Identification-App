@@ -14,7 +14,8 @@
         android:layout_marginTop="32dp"
         android:alpha=".6"
         android:paddingEnd="-10dp"
-        android:src="@drawable/leaf" />
+        android:src="@drawable/leaf"
+        android:importantForAccessibility="no" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -23,7 +24,8 @@
         android:layout_marginBottom="32dp"
         android:alpha=".5"
         android:paddingStart="-8dp"
-        android:src="@drawable/lead_flip" />
+        android:src="@drawable/lead_flip"
+        android:importantForAccessibility="no" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -156,18 +158,10 @@
                 style="?attr/materialIconButtonFilledStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="Login with Google"
                 app:iconSize="36dp"
                 app:icon="@drawable/ic_google_24" />
         </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="64dp"
-            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/create_acc_layout"
@@ -193,4 +187,19 @@
                 android:text="Create Account" />
         </LinearLayout>
     </RelativeLayout>
+    <View
+        android:id="@+id/loading_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading_icon"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        app:lottie_rawRes="@raw/loading"
+        android:visibility="gone"
+        android:layout_centerInParent="true" />
 </RelativeLayout>

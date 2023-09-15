@@ -45,12 +45,12 @@
             app:iconTint="@color/white"
             app:icon="@drawable/ic_help_24"/>
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="48dp"
-            android:src="@drawable/ic_camera_corner"
-            tools:ignore="ContentDescription" />
+            app:lottie_rawRes="@raw/camera_corner"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
 
         <ImageView
             android:id="@+id/focusRing"
