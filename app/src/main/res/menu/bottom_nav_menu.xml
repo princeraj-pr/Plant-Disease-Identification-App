@@ -14,10 +14,6 @@
         android:title="Diagnose" />
 
     <item
-        android:id="@+id/placeholder"
-        android:title="" />
-
-    <item
         android:id="@+id/my_plants"
         android:icon="@drawable/ic_name_24"
         android:title="My Plants" />
@@ -26,5 +22,9 @@
         android:id="@+id/account"
         android:icon="@drawable/ic_user_24"
         android:title="Account" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
 
 </menu>

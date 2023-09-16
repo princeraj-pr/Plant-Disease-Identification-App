@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/setting"
+        android:title="Settings"/>
+
+    <item
+        android:id="@+id/feedback"
+        android:title="Give Feedback"/>
+
+    <item
+        android:id="@+id/recommendApp"
+        android:title="Recommend App"/>
+
+    <item
+        android:id="@+id/contact"
+        android:title="@string/contact_social"/>
+
+    <item
+        android:id="@+id/thx"
+        android:title="Thanks"/>
+
+    <item
+        android:id="@+id/legal_notices"
+        android:title="Legal Notices"/>
+
+    <item
+        android:id="@+id/quickstart"
+        android:title="Quickstart"/>
+
+</menu>

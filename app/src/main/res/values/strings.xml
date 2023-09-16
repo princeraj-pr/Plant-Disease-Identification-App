@@ -12,4 +12,5 @@
     <string name="receive_email">I don\'t want to receive emails with the latest plant news and recommendations from botanists.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contact_social"><![CDATA[Contact & Social]]></string>
 </resources>
