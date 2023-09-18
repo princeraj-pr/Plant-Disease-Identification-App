@@ -4,10 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.sih23.plantdiseaseidentifiers.adapters.FruitAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,6 +74,29 @@ public class HomeFragment extends Fragment {
             Intent cameraIntent = new Intent(getContext(), CameraActivity.class);
             startActivity(cameraIntent);
         });
+
+        RecyclerView fruitView = view.findViewById(R.id.fruit_list);
+        LinearLayoutManager fruitLayoutManager = new LinearLayoutManager(getContext());
+        fruitLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        fruitView.setLayoutManager(fruitLayoutManager);
+        FruitAdapter fruitAdapter = new FruitAdapter();
+        fruitAdapter.submitList(getFruit());
+        fruitView.setAdapter(fruitAdapter);
         return view;
+    }
+
+    public List<FruitEntry> getFruit() {
+        List<FruitEntry> fruitEntries = new ArrayList<FruitEntry>();
+        fruitEntries.add(new FruitEntry(1, R.drawable.ic_pineapple));
+        fruitEntries.add(new FruitEntry(2, R.drawable.ic_apple));
+        fruitEntries.add(new FruitEntry(3, R.drawable.ic_eggplant));
+        fruitEntries.add(new FruitEntry(4, R.drawable.ic_potato));
+        fruitEntries.add(new FruitEntry(5, R.drawable.ic_banana));
+        fruitEntries.add(new FruitEntry(6, R.drawable.ic_pumpkin));
+        fruitEntries.add(new FruitEntry(7, R.drawable.ic_grapes));
+        fruitEntries.add(new FruitEntry(8, R.drawable.ic_tomato));
+        fruitEntries.add(new FruitEntry(9, R.drawable.ic_orange));
+        fruitEntries.add(new FruitEntry(10, R.drawable.ic_fruit));
+        return fruitEntries;
     }
 }
