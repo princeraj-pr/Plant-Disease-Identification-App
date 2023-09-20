@@ -1,8 +1,10 @@
 package com.sih23.plantdiseaseidentifiers;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,11 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sih23.plantdiseaseidentifiers.adapters.FruitAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +31,13 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+
+    public static String BaseUrl = "https://api.openweathermap.org/";
+    public static String AppId = "af59eff54364d5fdb49d06155cb90244";
+    public static String lat = "35";
+    public static String lon = "139";
+
+    private TextView weatherData;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,6 +98,20 @@ public class HomeFragment extends Fragment {
         FruitAdapter fruitAdapter = new FruitAdapter();
         fruitAdapter.submitList(getFruit());
         fruitView.setAdapter(fruitAdapter);
+
+
+        weatherData = view.findViewById(R.id.textView6);
+
+//        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "Lato-Bold.ttf");
+//        FontUtils fontUtils = new FontUtils();
+//        fontUtils.applyFontToView(weatherData, typeface);
+
+        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCurrentData();
+            }
+        });
         return view;
     }
 
@@ -98,5 +128,48 @@ public class HomeFragment extends Fragment {
         fruitEntries.add(new FruitEntry(9, R.drawable.ic_orange));
         fruitEntries.add(new FruitEntry(10, R.drawable.ic_fruit));
         return fruitEntries;
+    }
+
+    void getCurrentData() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BaseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        WeatherService service = retrofit.create(WeatherService.class);
+        Call<WeatherResponse> call = service.getCurrentWeatherData(lat, lon, AppId);
+        call.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<WeatherResponse> call, @NonNull Response<WeatherResponse> response) {
+                if (response.code() == 200) {
+                    WeatherResponse weatherResponse = response.body();
+                    assert weatherResponse != null;
+
+                    String stringBuilder = "Country: " +
+                            weatherResponse.sys.country +
+                            "\n" +
+                            "Temperature: " +
+                            weatherResponse.main.temp +
+                            "\n" +
+                            "Temperature(Min): " +
+                            weatherResponse.main.temp_min +
+                            "\n" +
+                            "Temperature(Max): " +
+                            weatherResponse.main.temp_max +
+                            "\n" +
+                            "Humidity: " +
+                            weatherResponse.main.humidity +
+                            "\n" +
+                            "Pressure: " +
+                            weatherResponse.main.pressure;
+
+                    weatherData.setText(stringBuilder);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<WeatherResponse> call, @NonNull Throwable t) {
+                weatherData.setText(t.getMessage());
+            }
+        });
     }
 }
