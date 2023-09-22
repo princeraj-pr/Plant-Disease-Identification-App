@@ -45,12 +45,15 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/camera_fab"
+        style="?attr/floatingActionButtonLargeStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
-        app:fabCustomSize="64dp"
         app:srcCompat="@drawable/ic_message_24"
-        android:backgroundTint="@color/colorAccent"
-        app:layout_anchor="@id/bottomAppBar" />
+        android:layout_marginBottom="100dp"
+        app:fabCustomSize="90dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/colorAccent" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

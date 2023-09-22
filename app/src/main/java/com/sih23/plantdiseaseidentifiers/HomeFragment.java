@@ -1,19 +1,27 @@
 package com.sih23.plantdiseaseidentifiers;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.location.Location;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.sih23.plantdiseaseidentifiers.adapters.FruitAdapter;
 
 import java.util.ArrayList;
@@ -32,11 +40,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class HomeFragment extends Fragment {
 
+    private String LOG_TAG = HomeFragment.class.getSimpleName();
+
     public static String BaseUrl = "https://api.openweathermap.org/";
     public static String AppId = "af59eff54364d5fdb49d06155cb90244";
-    public static String lat = "35";
-    public static String lon = "139";
-
+    public static String lat = "0";
+    public static String lon = "0";
     private TextView weatherData;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -76,7 +85,15 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            String[] coordinate = getArguments().getStringArray(PlantActivity.ARG_PARAM_COORDINATE);
+            if (coordinate != null) {
+                lon = coordinate[0];
+                lat = coordinate[1];
+            }
+        } else {
+            Log.d(LOG_TAG, "No arguments");
         }
+        getCurrentData();
     }
 
     @Override
@@ -99,19 +116,7 @@ public class HomeFragment extends Fragment {
         fruitAdapter.submitList(getFruit());
         fruitView.setAdapter(fruitAdapter);
 
-
         weatherData = view.findViewById(R.id.textView6);
-
-//        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "Lato-Bold.ttf");
-//        FontUtils fontUtils = new FontUtils();
-//        fontUtils.applyFontToView(weatherData, typeface);
-
-        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCurrentData();
-            }
-        });
         return view;
     }
 
@@ -131,6 +136,17 @@ public class HomeFragment extends Fragment {
     }
 
     void getCurrentData() {
+        // Get coordinates of current location to show weather
+        String[] coordinate;
+        if (getArguments() != null) {
+            coordinate = getArguments()
+                    .getStringArray(PlantActivity.ARG_PARAM_COORDINATE);
+            if (coordinate != null) {
+                lon = coordinate[0];
+                lat = coordinate[1];
+                Toast.makeText(getContext(), "lon: " + lon + " lat: " + lat, Toast.LENGTH_SHORT).show();
+            }
+        }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
