@@ -22,4 +22,8 @@
         android:id="@+id/account"
         android:icon="@drawable/ic_user_24"
         android:title="Account" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
 </menu>

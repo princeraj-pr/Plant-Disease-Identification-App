@@ -1,13 +1,8 @@
 package com.sih23.plantdiseaseidentifiers;
 
-import android.Manifest;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.location.Location;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.sih23.plantdiseaseidentifiers.adapters.FruitAdapter;
 
 import java.util.ArrayList;
@@ -40,6 +33,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class HomeFragment extends Fragment {
 
+    /**
+     * Test link
+     * https://api.openweathermap.org/data/2.5/weather?lat=26.1381652&lon=85.3663907&appid=af59eff54364d5fdb49d06155cb90244
+     */
+
     private String LOG_TAG = HomeFragment.class.getSimpleName();
 
     public static String BaseUrl = "https://api.openweathermap.org/";
@@ -47,6 +45,13 @@ public class HomeFragment extends Fragment {
     public static String lat = "0";
     public static String lon = "0";
     private TextView weatherData;
+    private WeatherEntry weather;
+    private TextView cityAndDateText;
+    private TextView tempText;
+    private TextView sunStateText;
+    private TextView skyStateText;
+    private TextView humidityText;
+    private TextView farmingAdviseText;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -116,7 +121,14 @@ public class HomeFragment extends Fragment {
         fruitAdapter.submitList(getFruit());
         fruitView.setAdapter(fruitAdapter);
 
-        weatherData = view.findViewById(R.id.textView6);
+        // Get all Weather View
+        cityAndDateText = view.findViewById(R.id.city_and_date_text);
+        tempText = view.findViewById(R.id.temp_text);
+        sunStateText = view.findViewById(R.id.sun_state_and_time_text);
+        skyStateText = view.findViewById(R.id.sky_text);
+        humidityText = view.findViewById(R.id.humidity_text);
+        farmingAdviseText = view.findViewById(R.id.advise_text);
+
         return view;
     }
 
@@ -160,25 +172,23 @@ public class HomeFragment extends Fragment {
                     WeatherResponse weatherResponse = response.body();
                     assert weatherResponse != null;
 
-                    String stringBuilder = "Country: " +
-                            weatherResponse.sys.country +
-                            "\n" +
-                            "Temperature: " +
-                            weatherResponse.main.temp +
-                            "\n" +
-                            "Temperature(Min): " +
-                            weatherResponse.main.temp_min +
-                            "\n" +
-                            "Temperature(Max): " +
-                            weatherResponse.main.temp_max +
-                            "\n" +
-                            "Humidity: " +
-                            weatherResponse.main.humidity +
-                            "\n" +
-                            "Pressure: " +
-                            weatherResponse.main.pressure;
+                    weather = new WeatherEntry(
+                            weatherResponse.name,
+                            weatherResponse.dt,
+                            weatherResponse.main.temp,
+                            weatherResponse.sys.sunrise,
+                            weatherResponse.sys.sunset,
+                            weatherResponse.weather.get(0).description,
+                            weatherResponse.main.humidity
+                    );
 
-                    weatherData.setText(stringBuilder);
+                    // Set all Weather value
+                    cityAndDateText.setText(weather.getCityNameAndFormatDate());
+                    tempText.setText(weather.getTempInCelsius());
+                    sunStateText.setText(weather.sunSetOrSunRiseTime());
+                    skyStateText.setText(weather.getSkyDescription());
+                    humidityText.setText(weather.getHumidityInPercentage());
+                    farmingAdviseText.setText(weather.getFarmingAdvise());
                 }
             }
 

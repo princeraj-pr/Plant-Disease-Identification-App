@@ -40,6 +40,8 @@ public class PlantActivity extends AppCompatActivity implements NavigationBarVie
         // Setup Bottom Navigation
         BottomNavigationView bottomNavigationView = binding.bottomNavigationView;
         bottomNavigationView.setBackground(null);
+        // Disable placeholder button in bottom navigation app bar
+        bottomNavigationView.getMenu().getItem(4).setEnabled(false);
         bottomNavigationView.setOnItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
 
