@@ -1,6 +1,7 @@
 package com.sih23.plantdiseaseidentifiers;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +49,18 @@ public class PlantActivity extends AppCompatActivity implements NavigationBarVie
         // Setup Toolbar
         MaterialToolbar mainToolbar = binding.mainToolbar;
         setSupportActionBar(mainToolbar);
+
+        // TODO: Fix this code in future
+        /*Intent intent = getIntent();
+        if (intent.hasExtra(CameraActivity.OPEN_MY_PLANT_FRAGMENT_PRAM)) {
+            if (intent.getIntExtra(CameraActivity.OPEN_MY_PLANT_FRAGMENT_PRAM, -1) == 3) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, MyPlantFragment.class, null)
+                        .commit();
+                bottomNavigationView.setSelectedItemId(R.id.my_plants);
+            }
+        }*/
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(

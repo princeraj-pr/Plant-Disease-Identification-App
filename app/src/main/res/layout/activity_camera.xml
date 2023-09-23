@@ -59,6 +59,13 @@
             android:src="@drawable/ic_auto_focus"
             android:visibility="invisible"
             tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/captureImagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="gone"/>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton

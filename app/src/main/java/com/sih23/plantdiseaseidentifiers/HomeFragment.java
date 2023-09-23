@@ -44,7 +44,6 @@ public class HomeFragment extends Fragment {
     public static String AppId = "af59eff54364d5fdb49d06155cb90244";
     public static String lat = "0";
     public static String lon = "0";
-    private TextView weatherData;
     private WeatherEntry weather;
     private TextView cityAndDateText;
     private TextView tempText;
@@ -194,7 +193,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<WeatherResponse> call, @NonNull Throwable t) {
-                weatherData.setText(t.getMessage());
+                cityAndDateText.setText(t.getMessage());
             }
         });
     }

@@ -2,11 +2,14 @@ package com.sih23.plantdiseaseidentifiers;
 
 import android.Manifest;
 import android.animation.Animator;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -29,18 +32,18 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.sih23.plantdiseaseidentifiers.databinding.ActivityCameraBinding;
+import com.sih23.plantdiseaseidentifiers.utils.ImageUtils;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 
 public class CameraActivity extends AppCompatActivity {
-
+    public static final String OPEN_MY_PLANT_FRAGMENT_PRAM = "showImage";
     private static final String TAG_LOG = CameraActivity.class.getSimpleName();
     private static final int REQUEST_CODE_PERMISSIONS = 1001;
     private final String[] REQUIRED_PERMISSIONS =
@@ -78,19 +81,42 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void takePhoto() {
-        SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
-        // Create time stamped name and MediaStore entry.
-        String FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS";
-        String name = new SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-                .format(System.currentTimeMillis());
-        File file = new File(getExternalFilesDir(null), System.currentTimeMillis() + ".jpg");
-        ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
+        File file = new File(getExternalFilesDir(null), "sample" + ".jpg");
+        ImageCapture.OutputFileOptions outputFileOptions =
+                new ImageCapture.OutputFileOptions.Builder(file).build();
         imageCapture.takePicture(outputFileOptions, Executors.newCachedThreadPool(), new ImageCapture.OnImageSavedCallback() {
             @Override
             public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        // Show image review
+                        ImageView previewImage = binding.captureImagePreview;
+                        previewImage.setVisibility(View.VISIBLE);
+                        Bitmap bitmap = ImageUtils.getCorrectOrientatedBitmap(outputFileResults
+                                .getSavedUri()
+                                .getPath()
+                        );
+                        previewImage.setImageBitmap(bitmap);
+                        // Update camera UI
+                        binding.flashButton.setVisibility(View.INVISIBLE);
+                        binding.addPhotoButton.setIconResource(R.drawable.ic_cancel_24);
+                        binding.imageCaptureButton.setIconResource(R.drawable.ic_select_24);
+
+                        binding.imageCaptureButton.setOnClickListener(v -> {
+                            Intent intent = new Intent(CameraActivity.this, PlantActivity.class);
+                            intent.putExtra(OPEN_MY_PLANT_FRAGMENT_PRAM, 3);
+                            startActivity(intent);
+                            finish();
+                        });
+                        // Retake photo
+                        binding.addPhotoButton.setOnClickListener(v -> {
+                            previewImage.setVisibility(View.GONE);
+                            binding.flashButton.setVisibility(View.VISIBLE);
+                            binding.imageCaptureButton.setIconResource(R.drawable.ic_camera_shutter_24);
+                            binding.addPhotoButton.setIconResource(R.drawable.ic_add_photo_24);
+                            binding.imageCaptureButton.setOnClickListener(v1 -> takePhoto());
+                        });
                         Toast.makeText(getBaseContext(), "Image Saved successfully", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -144,6 +170,7 @@ public class CameraActivity extends AppCompatActivity {
         // Preview
         Preview preview = new Preview.Builder()
                 .setTargetAspectRatio(aspectRatio)
+                .setTargetRotation(Surface.ROTATION_0) // Use ROTATION_0 for portrait
                 .build();
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
@@ -153,9 +180,10 @@ public class CameraActivity extends AppCompatActivity {
                 .build();
 
         imageCapture = new ImageCapture.Builder()
-                .setFlashMode(ImageCapture.FLASH_MODE_ON)
+                //.setFlashMode(ImageCapture.FLASH_MODE_ON)
                 .setTargetAspectRatio(aspectRatio)
-                .setTargetRotation(this.getWindowManager().getDefaultDisplay().getRotation())
+                //.setTargetRotation(this.getWindowManager().getDefaultDisplay().getRotation())
+                .setTargetRotation(Surface.ROTATION_0) // Use ROTATION_0 for portrait
                 .build();
 
         // Unbind use cases before rebinding

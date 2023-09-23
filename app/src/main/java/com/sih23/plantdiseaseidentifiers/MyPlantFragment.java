@@ -1,8 +1,7 @@
 package com.sih23.plantdiseaseidentifiers;
 
-import android.content.Context;
 import android.content.ContextWrapper;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,7 +9,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
+
+import com.sih23.plantdiseaseidentifiers.databinding.FragmentMyPlantBinding;
+import com.sih23.plantdiseaseidentifiers.utils.AppExecutors;
+import com.sih23.plantdiseaseidentifiers.utils.ImageUtils;
 
 import java.io.File;
 
@@ -20,6 +23,8 @@ import java.io.File;
  * create an instance of this fragment.
  */
 public class MyPlantFragment extends Fragment {
+    FragmentMyPlantBinding binding;
+    private Bitmap bitmap;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,14 +69,44 @@ public class MyPlantFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_my_plant, container, false);
+        binding = FragmentMyPlantBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        ImageView imageView = view.findViewById(R.id.plant_image);
+        // Get image file from internal storage
         ContextWrapper cw = new ContextWrapper(getContext());
         File directory = cw.getExternalFilesDir(null);
-        File file = new File(directory, "plant" + ".jpg");
-        imageView.setImageDrawable(Drawable.createFromPath(file.toString()));
+        File file = new File(directory, "sample" + ".jpg");
+
+        // Show loading animation and disable button click
+        binding.loadingAnimation.setVisibility(View.VISIBLE);
+        binding.findDiseaseButton.setEnabled(false);
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            // Load image bitmap from internal storage
+            bitmap = ImageUtils.getCorrectOrientatedBitmap(file.getPath());
+            AppExecutors.getInstance().mainThread().execute(() -> {
+                // Update UI
+                // Hide loading animation and enable button click
+                binding.loadingAnimation.setVisibility(View.GONE);
+                binding.findDiseaseButton.setEnabled(true);
+                // Set image to preview image view
+                binding.plantImage.setImageBitmap(bitmap);
+            });
+        });
+
+        binding.findDiseaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true);
+
+                // TODO: Tensorflow lite ML model code here
+
+                // Set text view with disease info from ML model output
+                binding.diseaseDetailText.setText("Plant Disease Detail");
+            }
+        });
+
         return view;
     }
+
+
 }

@@ -41,7 +41,7 @@ public class WeatherEntry {
 
     public String sunSetOrSunRiseTime() {
         double currentTime = System.currentTimeMillis();
-        if (currentTime > getSunRiseTime() && currentTime < getSunSetTime()) {
+        if (currentTime > 1000 * getSunRiseTime() && currentTime < 1000 * getSunSetTime()) {
             // Show sunset time
             Date date = new Date(getSunSetTime() * 1000); // multiplying 1000 to get time in millisecond for Data object
             SimpleDateFormat formatter = new SimpleDateFormat("h:mm a");
