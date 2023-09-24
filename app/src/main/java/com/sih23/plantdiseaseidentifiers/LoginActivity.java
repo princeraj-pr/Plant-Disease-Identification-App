@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                         // Destroy current activity after user login successfully
                         finish();
                     }
-                }, 2000);
+                }, 0);
             }
         });
     }

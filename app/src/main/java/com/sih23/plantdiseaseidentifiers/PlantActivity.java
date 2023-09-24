@@ -70,18 +70,20 @@ public class PlantActivity extends AppCompatActivity implements NavigationBarVie
                             .AndroidViewModelFactory
                             .getInstance(this.getApplication())
                             .create(LocationViewModel.class);
-                    viewModel.getCoordinate().observe(this, new Observer<String[]>() {
-                        @Override
-                        public void onChanged(String[] strings) {
-                            Bundle coordinateBundle = new Bundle();
-                            coordinateBundle.putStringArray(ARG_PARAM_COORDINATE, strings);
-                            // Passing coordinate value to home fragment
-                            FragmentManager fragmentManager = getSupportFragmentManager();
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.frameLayout, HomeFragment.class, coordinateBundle)
-                                    .commit();
-                        }
-                    });
+                    if (viewModel.getCoordinate() != null) {
+                        viewModel.getCoordinate().observe(this, new Observer<String[]>() {
+                            @Override
+                            public void onChanged(String[] strings) {
+                                Bundle coordinateBundle = new Bundle();
+                                coordinateBundle.putStringArray(ARG_PARAM_COORDINATE, strings);
+                                // Passing coordinate value to home fragment
+                                FragmentManager fragmentManager = getSupportFragmentManager();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frameLayout, HomeFragment.class, coordinateBundle)
+                                        .commit();
+                            }
+                        });
+                    }
                 });
         permissionLauncher.launch(new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION,
