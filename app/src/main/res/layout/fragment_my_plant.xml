@@ -23,14 +23,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/find_disease_Button"
+            android:id="@+id/upload_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Find Disease"
+            android:layout_marginTop="8dp"
+            android:text="Select Image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/plant_image" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/find_disease_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Find Disease"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upload_button" />
 
         <TextView
             android:id="@+id/disease_detail_text"

@@ -1,13 +1,5 @@
 package com.sih23.plantdiseaseidentifiers;
 
-import static java.security.AccessController.getContext;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,11 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.shape.MaterialShapeDrawable;
-import com.sih23.plantdiseaseidentifiers.databinding.ActivityLoginBinding;
 import com.sih23.plantdiseaseidentifiers.databinding.ActivitySignUpBinding;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -51,6 +45,9 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 if (fragmentState) {
+                    // Update UI for to create expert account
+                    binding.noAccountText.setText("Create Expert Account");
+                    binding.switchCreateAccBtn.setText("Expert Account");
                     fragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, UserSignUpFragment.class, null)
                             .setReorderingAllowed(true)
@@ -58,6 +55,9 @@ public class SignUpActivity extends AppCompatActivity {
                             .commit();
                     fragmentState = false;
                 } else {
+                    // Update UI for to create user account
+                    binding.noAccountText.setText("Create User Account");
+                    binding.switchCreateAccBtn.setText("User Account");
                     fragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, ExpertSignUpFragment.class, null)
                             .setReorderingAllowed(true)
