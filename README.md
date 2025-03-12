@@ -12,7 +12,7 @@ This project aims to develop an AI-driven Android application that identifies pl
 
 ## 🛠 Tech Stack
 - **Machine Learning**: Python, TensorFlow Lite, EfficientNet-B3 CNN
-- **Android Development**: Kotlin, XML,CameraX API, Lottie Animation Library
+- **Android Development**: Kotlin, XML
 - **Monitoring & Training**: Custom Callback (LR_ASK)
 - **UI & Animation**: Material Design Components, Lottie Animation
 - **Camera & Image Processing**: CameraX API
